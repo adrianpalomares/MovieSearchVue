@@ -1,0 +1,14 @@
+{
+  "name": "moviesearch",
+  "version": "1.0.0",
+  "description": "A module to use with The Open Movie Database API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adrian Palomares",
+  "license": "ISC",
+  "dependencies": {
+    "superagent": "^5.2.2"
+  }
+}

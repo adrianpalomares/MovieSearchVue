@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Movie Search</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Movie Search App</h1>
+        </div>
+    </div>
+    <!-- Movies -->
+    <div id="movies" class="container">
+        <!-- Search bar -->
+        <div class="input-group flex-nowrap">
+            <input type="text" class="form-control" placeholder="Search for a movie" aria-label="Username" aria-describedby="addon-wrapping" v-model="searchQuery" @keyup.enter="getSearchResults">
+        </div>
+        <!-- Movie Results -->
+        <div class="row">
+            <div v-for="m in moviesData" v-if="m !== null" v-bind:key="m.imdbID" class="card col-sm-12 col-lg-3" style="width: 18rem;">
+                <img v-bind:src="m.Poster" class="card-img" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ m.Title }} ({{ m.Year }})</h5>
+                    <!-- Button to activate modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" v-bind:movie-id="m.imdbID" @click="getMovieDetails">
+                        More Details
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">{{ movieDetail.Title }} ({{ movieDetail.Year }})</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img v-bind:src="movieDetail.Poster">
+                        <h5>Rating: {{ movieDetail.Rated }}</h5>
+                        <h5>Genre: {{ movieDetail.Genre }}</h5>
+                        <p>{{ movieDetail.Plot }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
