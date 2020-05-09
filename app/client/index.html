@@ -17,12 +17,16 @@
     <div id="movies" class="container">
         <!-- Search bar -->
         <div class="input-group flex-nowrap">
-            <input type="text" class="form-control" placeholder="Search for a movie" aria-label="Username" aria-describedby="addon-wrapping" v-model="searchQuery" @keyup.enter="getSearchResults">
+            <input type="text" class="form-control mb-3" placeholder="Search for a movie" aria-label="Username" aria-describedby="addon-wrapping" v-model="searchQuery" @keyup.enter="getSearchResults">
         </div>
+        
+        <!-- Displays search history -->
+        <h5 class="mt-2" v-show="numOfMovies">Search Results: {{ numOfMovies }}</h5>
+        
         <!-- Movie Results -->
         <div class="row">
-            <div v-for="m in moviesData" v-if="m !== null" v-bind:key="m.imdbID" class="card col-sm-12 col-lg-3" style="width: 18rem;">
-                <img v-bind:src="m.Poster" class="card-img" alt="...">
+            <div v-for="m in moviesData" v-if="m !== null" v-bind:key="m.imdbID" class="card col-sm-12 col-lg-3 mb-2" style="width: 5rem;">
+                <img v-bind:src="m.Poster" class="card-img pt-3" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ m.Title }} ({{ m.Year }})</h5>
                     <!-- Button to activate modal -->
@@ -32,6 +36,10 @@
                 </div>
             </div>
         </div>
+
+        <!-- Search History -->
+        <search-history-component v-show="searchHistory.length" v-bind:search-history="searchHistory" v-bind:get-search-results-by-query="getSearchResultsByQuery"></search-history-component>
+
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -43,7 +51,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img v-bind:src="movieDetail.Poster">
+                        <img style="margin-left: 75px" v-bind:src="movieDetail.Poster">
+                        <h5 class="mt-2">Released: {{ movieDetail.Released }}</h5>
                         <h5>Rating: {{ movieDetail.Rated }}</h5>
                         <h5>Genre: {{ movieDetail.Genre }}</h5>
                         <p>{{ movieDetail.Plot }}</p>
@@ -54,6 +63,7 @@
                 </div>
             </div>
         </div>
+        
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

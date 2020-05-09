@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 
-// Require moviesearch module
+/*
+    Includes search(query) and getMovieById(id)
+*/
 const movieSearch = require('moviesearch');
 
 /*
@@ -44,9 +46,8 @@ Will be used on homepage.
 
 router.get("/topmovies", async (request, response) => {
     // Current top movies; hard-coded from rotten tomato
-    const currTopMovieTitles = ['Black Panther', 'Avengers:Endgame', 'Us', 'Toy Story 4', 'Lady Bird', 'Mission Impossible-Fallout',
-        'The Wizard of Oz', 'The Irishman'
-    ];
+    const currTopMovieTitles = ['Black Panther', 'Avengers:Endgame', 'Joker', 'Toy Story 4', 'Lady Bird', 'Mission Impossible-Fallout',
+        'The Wizard of Oz', 'The Irishman'];
 
     // The object that will be sent back
     let responseObject = {data:[]};

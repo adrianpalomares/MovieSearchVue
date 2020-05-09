@@ -1,3 +1,20 @@
-.form-control, .row {
+/*.form-control {
 	padding: 20px;
+}*/
+
+.row {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.search-history-section {
+	background-color: #e9ecef;
+}
+
+a {
+	cursor: pointer;
+}
+
+.search-history-section a {
+	color: blue;
 }
