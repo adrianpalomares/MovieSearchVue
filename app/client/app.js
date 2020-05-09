@@ -21,6 +21,7 @@ const movies = new Vue({
     },
     computed: {
         numOfMovies: function() {
+            // If search history is empty == has not search for movie yet
             if (this.searchHistory.length == 0) {
                 return 0;
             } else {
@@ -33,8 +34,8 @@ const movies = new Vue({
             const searchResult = await axios.get(`api/search/${this.searchQuery}`);
             this.moviesData = searchResult.data;
             // Check for duplicates
-            if (!this.searchHistory.includes(this.searchQuery)) {
-                this.searchHistory.push(this.searchQuery);
+            if (!this.searchHistory.includes(this.searchQuery.toLowerCase())) {
+                this.searchHistory.push(this.searchQuery.toLowerCase());
             }
             this.searchQuery = "";
         },
@@ -47,12 +48,6 @@ const movies = new Vue({
         getSearchResultsByQuery: async function(query) {
             const searchResult = await axios.get(`api/search/${query}`);
             this.moviesData = searchResult.data;
-            // Check for duplicates
-            if (!this.searchHistory.includes(this.searchQuery)) {
-                this.searchHistory.push(this.searchQuery);
-            }
-
-
         }
     },
     created: async function() {
