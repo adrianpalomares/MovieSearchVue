@@ -54,7 +54,7 @@ router.get("/topmovies", async (request, response) => {
 
     // Requesting information on each of the movie title in the currTopMovieTitles array
     for (let i = 0; i < currTopMovieTitles.length; i++) {
-        const movieSearchResult = await axios.get(`http://localhost:8080/api/search/${currTopMovieTitles[i]}`);
+        const movieSearchResult = await axios.get(`${request.headers.referer}api/search/${currTopMovieTitles[i]}`);
         responseObject.data.push(movieSearchResult.data[0]);
     }
     
