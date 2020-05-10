@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
+// Serving Vue app
 app.use(express.static(path.join(__dirname, "..", "/client")));
 
 const apiRoutes = require("./api/routes.js");
